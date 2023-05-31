@@ -1,8 +1,13 @@
+# Nome: João Pedro Gonçalves Viana RGM 5934238212
+# Nome: Pietro Danton Silveira RGM 5933512515
+# Nome: Henry Dietri Yoshida RGM 5934114530
+# Campus Paulista
+
 import time
 
 def binario_para_decimal(binario):
   if not binario.isdigit() or any(digito not in '01' for digito in binario):
-    print("Erro: O número fornecido não é binário.")
+    print("ERRO! DIGITE UM BINÁRIO VÁLIDO.")
     return None
 
   decimal = 0
@@ -15,7 +20,7 @@ def binario_para_decimal(binario):
 
 def octal_para_decimal(octal):
   if not octal.isdigit() or any(digito not in '01234567' for digito in octal):
-    print("Erro: O número fornecido não é octal.")
+    print("ERRO! DIGITE UM OCTAL VÁLIDO.")
     return None
 
   decimal = 0
@@ -28,7 +33,7 @@ def octal_para_decimal(octal):
 
 def decimal_para_binario(decimal):
   if not decimal.isdigit():
-    print("Erro: O número fornecido não é decimal.")
+    print("ERRO! DIGITE UM DECIMAL VÁLIDO.")
     return None
 
   decimal = int(decimal)
@@ -44,7 +49,7 @@ def decimal_para_binario(decimal):
 
 def decimal_para_octal(decimal):
   if not decimal.isdigit():
-    print("Erro: O número fornecido não é decimal.")
+    print("ERRO! DIGITE UM DECIMAL VÁLIDO.")
     return None
 
   decimal = int(decimal)
@@ -59,9 +64,8 @@ def decimal_para_octal(decimal):
 
 
 def soma_binaria(binario1, binario2):
-  if not (binario1.isdigit() and binario2.isdigit()) or any(
-      digito not in '01' for digito in binario1 + binario2):
-    print("Erro: Os números fornecidos não são binários.")
+  if not (binario1.isdigit() and binario2.isdigit()) or any(digito not in '01' for digito in binario1 + binario2):
+    print("ERRO! DIGITE BINÁRIOS VÁLIDOS.")
     return None
 
   if len(binario1) < len(binario2):
@@ -88,9 +92,8 @@ def soma_binaria(binario1, binario2):
 
 
 def subtracao_binaria(binario1, binario2):
-  if not (binario1.isdigit() and binario2.isdigit()) or any(
-      digito not in '01' for digito in binario1 + binario2):
-    print("Erro: Os números fornecidos não são binários.")
+  if not (binario1.isdigit() and binario2.isdigit()) or any(digito not in '01' for digito in binario1 + binario2):
+    print("ERRO! DIGITE BINÁRIOS VÁLIDOS.")
     return None
 
   if len(binario1) < len(binario2):
@@ -128,78 +131,88 @@ print("-" * 20)
 main_option = 0
 
 while main_option != 4:
-  main_option = int(
-    input(
-      "\nESCOLHA A OPÇÃO QUE DESEJA \n\n[1] CONVERSÃO DE BINÁRIO E/OU OCTAL PARA DECIMAL \n[2] CONVERSÃO DE DECIMAL PARA BINÁRIO E/OU OCTAL \n[3] SOMA E SUBTRAÇÃO DE BINÁRIOS \n[4] SAIR DO PROGRAMA\n\n"
-    ))
+  try:
+    main_option = int(input("\nESCOLHA A OPÇÃO QUE DESEJA \n\n[1] CONVERSÃO DE BINÁRIO E/OU OCTAL PARA DECIMAL \n[2] CONVERSÃO DE DECIMAL PARA BINÁRIO E/OU OCTAL \n[3] SOMA E SUBTRAÇÃO DE BINÁRIOS \n[4] SAIR DO PROGRAMA\n\n"))
+    
+    if main_option not in [1,2,3,4]:
+      raise ValueError
 
-  if main_option == 1:
-    first_option = int(
-      input(
-        "\n[1] BINÁRIO PARA DECIMAL \n[2] OCTAL PARA DECIMAL \n[3] VOLTAR AO MENU \n\n"
-      ))
+    if main_option == 1:
+        while True:
+            try:
+                first_option = int(input("\n[1] BINÁRIO PARA DECIMAL \n[2] OCTAL PARA DECIMAL \n[3] VOLTAR AO MENU \n\n"))
+                if first_option == 1:
+                    binario = input("Digite um número binário: ")
+                    decimal = binario_para_decimal(binario)
+                    if decimal is not None: #para não aparecer resultado = none
+                        print("O binário", binario, "em decimal equivale a:", decimal)
+                        time.sleep(2)
+                elif first_option == 2:
+                    octal = input("Digite um número octal: ")
+                    decimal = octal_para_decimal(octal)
+                    if decimal is not None:
+                        print("O octal", octal, "em decimal equivale a:", decimal)
+                        time.sleep(2)
+                elif first_option == 3:
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("\nDIGITE UMA OPÇÃO VÁLIDA!")
 
-    while first_option != 3:
-      if first_option == 1:
-        binario = input("Digite um número binário: ")
-        decimal = binario_para_decimal(binario)
-        if decimal is not None:
-          print("O binário", binario, "em decimal equivale a:", decimal)
-          time.sleep(2)
-        first_option = int(
-          input(
-            "[1] BINÁRIO PARA DECIMAL \n[2] OCTAL PARA DECIMAL \n[3] VOLTAR AO MENU \n\n"
-          ))
-      elif first_option == 2:
-        octal = input("Digite um número octal: ")
-        decimal = octal_para_decimal(octal)
-        if decimal is not None:
-          print("O octal", octal, "em decimal equivale a:", decimal)
-          time.sleep(2)
-        first_option = int(
-          input(
-            "[1] BINÁRIO PARA DECIMAL \n[2] OCTAL PARA DECIMAL \n[3] VOLTAR AO MENU \n\n"
-          ))
+    elif main_option == 2:
+      while True:
+        try:
+          second_option = int(input("\n[1] DECIMAL PARA BINÁRIO/OCTAL \n[2] VOLTAR AO MENU \n\n"))
 
-  elif main_option == 2:
-    second_option = int(
-      input("\n[1] DECIMAL PARA BINÁRIO/OCTAL \n[2] VOLTAR AO MENU \n\n"))
+          if second_option == 1:
+            decimalx = input("Digite um número decimal: ")
+            binario = decimal_para_binario(decimalx)
+            octal = decimal_para_octal(decimalx)
+            if binario is not None:
+              print("O decimal", decimalx, "em binário equivale a:", binario)
+            if octal is not None:
+              print("O decimal", decimalx, "em octal equivale a:", octal)
+            time.sleep(2)
+            second_option = int(input("[1] DECIMAL PARA BINÁRIO/OCTAL \n[2] VOLTAR AO MENU \n\n"))
+          elif second_option == 2:
+            break
+          else:
+            raise ValueError
+        except ValueError:
+          print("\nDIGITE UMA OPÇÃO VÁLIDA!")
 
-    while second_option != 2:
-      decimalx = input("Digite um número decimal: ")
-      binario = decimal_para_binario(decimalx)
-      octal = decimal_para_octal(decimalx)
-      if binario is not None:
-        print("O decimal", decimalx, "em binário equivale a:", binario)
-      if octal is not None:
-        print("O decimal", decimalx, "em octal equivale a:", octal)
-      time.sleep(2)
-      second_option = int(
-        input("[1] DECIMAL PARA BINÁRIO/OCTAL \n[2] VOLTAR AO MENU \n\n"))
+    elif main_option == 3:
+      while True:
+        try:
+          third_option = int(input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
 
-  elif main_option == 3:
-    third_option = int(
-      input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
+          if third_option == 1:
+            binario1 = input("Digite o primeiro número binário: ")
+            binario2 = input("Digite o segundo número binário: ")
+            soma = soma_binaria(binario1, binario2)
+            if soma is not None:
+              print("Soma =", soma)
+              time.sleep(2)
+            third_option = int(input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
+          elif third_option == 2:
+            binario1 = input("Digite o primeiro número binário: ")
+            binario2 = input("Digite o segundo número binário: ")
+            subtracao = subtracao_binaria(binario1, binario2)
+            if subtracao is not None:
+              print("Subtração =", subtracao)
+              time.sleep(2)
+            third_option = int(input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
+          elif third_option == 3:
+            break
+          else:
+            raise ValueError
+        except ValueError:
+          print("\nDIGITE UMA OPÇÃO VÁLIDA!")
+            
 
-    while third_option != 3:
-      if third_option == 1:
-        binario1 = input("Digite o primeiro número binário: ")
-        binario2 = input("Digite o segundo número binário: ")
-        soma = soma_binaria(binario1, binario2)
-        if soma is not None:
-          print("Soma =", soma)
-          time.sleep(2)
-        third_option = int(
-          input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
-      elif third_option == 2:
-        binario1 = input("Digite o primeiro número binário: ")
-        binario2 = input("Digite o segundo número binário: ")
-        subtracao = subtracao_binaria(binario1, binario2)
-        if subtracao is not None:
-          print("Subtração =", subtracao)
-          time.sleep(2)
-        third_option = int(
-          input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
+  except ValueError:
+    print("\nDIGITE UMA OPÇÃO VÁLIDA!")
 
 print("\nSessão finalizada")
 time.sleep(2)
