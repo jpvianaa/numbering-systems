@@ -12,7 +12,7 @@ def binario_para_decimal(binario):
 
   decimal = 0
   potencia = 0
-  for digito in reversed(binario):
+  for digito in reversed(binario): 
     decimal += int(digito) * (2**potencia)
     potencia += 1
   return decimal
@@ -73,11 +73,11 @@ def soma_binaria(binario1, binario2):
 
   binario2 = binario2.zfill(len(binario1))
   resultado = ''
-  carry = 0
+  carry = 0 #para quando a soma for um valor maior que 1
 
-  for i in range(len(binario1) - 1, -1, -1):
-    bit1 = int(binario1[i])
-    bit2 = int(binario2[i])
+  for bit1, bit2 in zip(reversed(binario1), reversed(binario2)):
+    bit1 = int(bit1)
+    bit2 = int(bit2)
 
     soma = bit1 + bit2 + carry
     bit_soma = soma % 2
@@ -103,9 +103,9 @@ def subtracao_binaria(binario1, binario2):
   resultado = ''
   carry = 0
 
-  for i in range(len(binario1) - 1, -1, -1):
-    bit1 = int(binario1[i])
-    bit2 = int(binario2[i])
+  for bit1, bit2 in zip(reversed(binario1), reversed(binario2)):
+    bit1 = int(bit1)
+    bit2 = int(bit2)
 
     diferenca = bit1 - bit2 - carry
     if diferenca < 0:
@@ -164,7 +164,6 @@ while main_option != 4:
       while True:
         try:
           second_option = int(input("\n[1] DECIMAL PARA BINÁRIO/OCTAL \n[2] VOLTAR AO MENU \n\n"))
-
           if second_option == 1:
             decimalx = input("Digite um número decimal: ")
             binario = decimal_para_binario(decimalx)
@@ -174,7 +173,6 @@ while main_option != 4:
             if octal is not None:
               print("O decimal", decimalx, "em octal equivale a:", octal)
             time.sleep(2)
-            second_option = int(input("[1] DECIMAL PARA BINÁRIO/OCTAL \n[2] VOLTAR AO MENU \n\n"))
           elif second_option == 2:
             break
           else:
@@ -186,7 +184,6 @@ while main_option != 4:
       while True:
         try:
           third_option = int(input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
-
           if third_option == 1:
             binario1 = input("Digite o primeiro número binário: ")
             binario2 = input("Digite o segundo número binário: ")
@@ -194,7 +191,6 @@ while main_option != 4:
             if soma is not None:
               print("Soma =", soma)
               time.sleep(2)
-            third_option = int(input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
           elif third_option == 2:
             binario1 = input("Digite o primeiro número binário: ")
             binario2 = input("Digite o segundo número binário: ")
@@ -202,7 +198,6 @@ while main_option != 4:
             if subtracao is not None:
               print("Subtração =", subtracao)
               time.sleep(2)
-            third_option = int(input("\n[1] SOMA \n[2] SUBTRAÇÃO \n[3] VOLTAR AO MENU \n\n"))
           elif third_option == 3:
             break
           else:
